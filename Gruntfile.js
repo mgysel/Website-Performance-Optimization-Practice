@@ -48,10 +48,18 @@ module.exports = function(grunt) {
                 dest: 'img/'
             }]
         }
+    },
+
+    uglify: {
+      build: {
+        src: 'js/perfmatters.js',
+        dest: 'js/perfmatters.min.js'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.registerTask('default', ['responsive_images', 'imagemin']);
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.registerTask('default', ['responsive_images', 'imagemin', 'uglify']);
 };
