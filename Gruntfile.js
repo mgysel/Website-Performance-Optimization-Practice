@@ -55,11 +55,24 @@ module.exports = function(grunt) {
         src: 'js/perfmatters.js',
         dest: 'js/perfmatters.min.js'
       }
+    },
+
+    cssmin: {
+      target: {
+        files: [{
+          expand: true,
+          cwd: 'css',
+          src: ['*.css', '!*.min.css'],
+          dest: 'css',
+          ext: '.min.css'
+        }]
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-responsive-images');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('default', ['responsive_images', 'imagemin', 'uglify']);
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.registerTask('default', ['responsive_images', 'imagemin', 'uglify', 'cssmin']);
 };
