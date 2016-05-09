@@ -452,13 +452,13 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     switch(size) {
       case "1":
-        newWidth = 25;
+        newwidth = 25;
         break;
       case "2":
-        newWidth = 33.3;
+        newwidth = 33.3;
         break;
       case "3":
-        newWidth = 50;
+        newwidth = 50;
         break;
       default:
         console.log("bug in sizeSwitcher");
@@ -517,9 +517,9 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
   var items = document.querySelectorAll('.mover');
-  var topScroll = document.body.scrollTop;
+  var topScroll = document.body.scrollTop/1250;
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((topScroll / 1250) + (i % 5));
+    var phase = Math.sin((topScroll) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
