@@ -403,6 +403,7 @@ var resizePizzas = function(size) {
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
+  // Optimized by reducing the number of document queries.
   function changeSliderLabel(size) {
     switch(size) {
       case "1":
@@ -422,6 +423,7 @@ var resizePizzas = function(size) {
   changeSliderLabel(size);
 
   // Iterates through pizza elements on the page and changes their widths
+  // reduce calculations inside for loop.
   function changePizzaSizes(size) {
     switch(size) {
       case "1":
@@ -456,6 +458,7 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+// getElementById is a faster document selector.
 var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
@@ -489,6 +492,7 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   // The different types of phases
+  // Place as many calculations as possible outside of for loop.
   var items = document.getElementsByClassName('mover');
   var topScroll = document.body.scrollTop/1250;
   var dif_phases = [Math.sin((topScroll)), Math.sin((topScroll)+1), Math.sin((topScroll)+2), Math.sin((topScroll)+3), Math.sin((topScroll)+4)];
@@ -514,6 +518,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
+  // reduce the number of pizzas needed.
   for (var i = 0; i < 35; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -522,6 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
+    // getElementById is a quicker query selector.
     document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
