@@ -488,11 +488,12 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
-
+  // The different types of phases
   var items = document.getElementsByClassName('mover');
   var topScroll = document.body.scrollTop/1250;
+  var dif_phases = [Math.sin((topScroll)), Math.sin((topScroll)+1), Math.sin((topScroll)+2), Math.sin((topScroll)+3), Math.sin((topScroll)+4)];
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((topScroll) + (i % 5));
+    var phase = dif_phases[i % 5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
